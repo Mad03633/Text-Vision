@@ -21,7 +21,8 @@ Download and install [Tesseract OCR.](https://github.com/tesseract-ocr/tesseract
 Ensure the path to the tesseract.exe file is added to the script:
 
 ```
-pytesseract.pytesseract.tesseract_cmd = r'path'
+pytesseract.pytesseract.tesseract_cmd = r'path' 
+# Usually it is located in C:\Program Files\Tesseract-OCR\tesseract.exe
 ```
 
 ## Example
