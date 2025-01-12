@@ -35,20 +35,24 @@ file.close
 
 # Loop through each detected contour
 for cnt in contours:
-    # Get the bounding box for each contour 
+    # Get the bounding box for each contour
+    x: int # X-coordinate of the top-left corner of the bounding box
+    y: int # Y-coordinate of the top-left corner of the bounding box
+    w: int # Width of the bounding box 
+    h: int # Height of the bounding box
     x, y, w, h = cv2.boundingRect(cnt)
 
     # Draw a rectangle around the detected text region 
-    rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    rect: cv2.Mat = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
     # Crop the detected text region from the image
-    cropped = im2[y:y + h, x:x + w]
+    cropped: cv2.Mat = im2[y:y + h, x:x + w]
 
     # Appent mode
     file = open("recognized.txt", "a")
 
     # Extract text from the cropped region using Tesseract OCR
-    text = pytesseract.image_to_string(cropped)
+    text: str = pytesseract.image_to_string(cropped)
 
     file.write(text)
     file.write("\n")
