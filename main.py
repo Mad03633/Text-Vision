@@ -29,15 +29,21 @@ file = open("recognized.txt", "w+")
 file.write("")
 file.close
 
+# Loop through each detected contour
 for cnt in contours:
+    # Get the bounding box for each contour 
     x, y, w, h = cv2.boundingRect(cnt)
 
+    # Draw a rectangle around the detected text region 
     rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
+    # Crop the detected text region from the image
     cropped = im2[y:y + h, x:x + w]
 
+    # Appent mode
     file = open("recognized.txt", "a")
 
+    # Extract text from the cropped region using Tesseract OCR
     text = pytesseract.image_to_string(cropped)
 
     file.write(text)
